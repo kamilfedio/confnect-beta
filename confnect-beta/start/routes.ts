@@ -40,5 +40,5 @@ router
     router.get('/:id', [QuestionsController, 'show'])
     router.post('/', [QuestionsController, 'store']).use([throttle])
   })
-  .prefix('api/v1/questions')
+  .prefix('api/v1/events/questions')
   .use(middleware.auth())
