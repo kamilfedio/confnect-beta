@@ -3,7 +3,7 @@ import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import * as relations from '@adonisjs/lucid/types/relations'
 import Event from './event.js'
 
-export default class QuestionModel extends BaseModel {
+export default class Question extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
@@ -21,7 +21,4 @@ export default class QuestionModel extends BaseModel {
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
 }

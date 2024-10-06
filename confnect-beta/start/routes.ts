@@ -12,6 +12,7 @@ const QuestionsController = () => import('#controllers/questions_controller')
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import { throttle } from './limiter.js'
 
 router.get('/', async () => {
   return {
@@ -21,8 +22,8 @@ router.get('/', async () => {
 
 router
   .group(() => {
-    router.get('/', [EventsController, 'get']).use(middleware.auth())
-    router.post('/', [EventsController, 'create'])
+    router.get('/', [EventsController, 'get']).use([middleware.auth(), throttle])
+    router.post('/', [EventsController, 'create']).use([throttle])
     router.post('/join', [EventsController, 'login'])
     router
       .patch('/', [EventsController, 'update'])
@@ -36,6 +37,8 @@ router
 router
   .group(() => {
     router.get('/', [QuestionsController, 'index'])
+    router.get('/:id', [QuestionsController, 'show'])
+    router.post('/', [QuestionsController, 'store']).use([throttle])
   })
   .prefix('api/v1/questions')
   .use(middleware.auth())
