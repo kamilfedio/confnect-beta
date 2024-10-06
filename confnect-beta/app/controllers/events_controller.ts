@@ -50,7 +50,7 @@ export default class EventsController {
       await mailerControllerService.sendEmail(
         event.email,
         'Hi, your admin password is here',
-        `Admin password: ${passwords[0]}`
+        `Admin password: ${passwords[0]}, Invite code: ${inviteCode}`
       )
     }
 
