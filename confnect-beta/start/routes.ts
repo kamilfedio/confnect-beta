@@ -9,6 +9,7 @@
 
 const EventsController = () => import('#controllers/events_controller')
 const QuestionsController = () => import('#controllers/questions_controller')
+import transmit from '@adonisjs/transmit/services/main'
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
@@ -42,3 +43,5 @@ router
   })
   .prefix('api/v1/events/questions')
   .use(middleware.auth())
+
+transmit.registerRoutes((route) => route.middleware(middleware.auth()).prefix('api/v1/events'))

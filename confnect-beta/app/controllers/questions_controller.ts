@@ -1,4 +1,6 @@
+import TransmitService from '#services/transmit'
 import { createQuestionValidator } from '#validators/question'
+import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class QuestionsController {
@@ -11,10 +13,13 @@ export default class QuestionsController {
     return response.ok(questions)
   }
 
-  async store({ auth, request, response }: HttpContext) {
+  @inject()
+  async store({ auth, request, response }: HttpContext, transmitService: TransmitService) {
     const event = await auth.getUserOrFail()
     const payload = await createQuestionValidator.validate(request.all())
     const question = await event.related('questions').create(payload)
+
+    await transmitService.sendQuestion(event.id, question)
 
     return response.created(question)
   }

@@ -57,6 +57,7 @@
     "@adonisjs/limiter": "^2.3.2",
     "@adonisjs/lucid": "^21.2.0",
     "@adonisjs/mail": "^9.2.2",
+    "@adonisjs/transmit": "^2.0.2",
     "@vinejs/vine": "^2.1.0",
     "generate-password": "^1.7.1",
     "luxon": "^3.5.0",
