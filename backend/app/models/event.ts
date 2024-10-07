@@ -24,7 +24,7 @@ export default class Event extends BaseModel {
   @column({ serializeAs: null })
   declare adminPassword: string
 
-  @column({ serializeAs: null })
+  @column()
   declare userPassword: string
 
   @column()
@@ -45,9 +45,6 @@ export default class Event extends BaseModel {
   public static async hashPasswords(event: Event) {
     if (event.$dirty.adminPassword) {
       event.adminPassword = await hash.make(event.adminPassword)
-    }
-    if (event.$dirty.userPassword) {
-      event.userPassword = await hash.make(event.userPassword)
     }
   }
 

@@ -23,7 +23,7 @@ router.get('/', async () => {
 
 router
   .group(() => {
-    router.get('/', [EventsController, 'get']).use([middleware.auth(), throttle])
+    router.get('/', [EventsController, 'get']).use([middleware.auth()]) // throttle
     router.post('/', [EventsController, 'create']).use([throttle])
     router.post('/join', [EventsController, 'login'])
     router

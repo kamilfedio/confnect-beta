@@ -55,7 +55,7 @@ export default class EventsController {
     }
 
     return response.status(201).json({
-      event: { ...event.toJSON(), adminPassword: passwords[0], userPassword: passwords[1] },
+      event: { ...event.toJSON(), adminPassword: passwords[0] },
       token: { type: 'bearer', value: token.value!.release(), role: 'admin' },
     })
   }
