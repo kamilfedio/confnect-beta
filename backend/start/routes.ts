@@ -44,4 +44,4 @@ router
   .prefix('api/v1/events/questions')
   .use(middleware.auth())
 
-transmit.registerRoutes((route) => route.middleware(middleware.auth()).prefix('api/v1/events'))
+transmit.registerRoutes((route) => route.prefix('api/v1/events'))

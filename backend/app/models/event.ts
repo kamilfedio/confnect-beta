@@ -59,10 +59,11 @@ export default class Event extends BaseModel {
   }) {
     const event = await this.query().where('inviteCode', inviteCode).firstOrFail()
 
-    if (!(await hash.verify(event[passwordType], password))) {
+    if (passwordType === 'adminPassword' && !(await hash.verify(event.adminPassword, password))) {
+      throw new Error('Invalid credentials')
+    } else if (passwordType === 'userPassword' && !((await event.userPassword) === password)) {
       throw new Error('Invalid credentials')
     }
-
     return event
   }
 }
